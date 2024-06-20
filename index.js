@@ -12,7 +12,11 @@ const plainTextPassword = "admin123";
 const app = express();
 const port = 3000; // Use PORT from .env or default to 3000
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://checkmedqrmodule.netlify.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+}));
 app.use(bodyParser.json());
 
 // const db = mysql.createConnection({
