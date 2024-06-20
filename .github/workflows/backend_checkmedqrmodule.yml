@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'checkmedqrmodule'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A14CB729DAC34AC9B9B59A495ED0090F }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .
