@@ -15,4 +15,3 @@ dist/
 # Optional: Ignore sensitive information like config files or API keys
 config.js
 .env.local
-DigiCertGlobalRootCA.crt.pem
