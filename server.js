@@ -32,33 +32,20 @@ db.connect((err) => {
   }
   console.log("Connected to MySQL database.");
 });
-  db.query("SELECT * FROM admins WHERE username = 'Admin'", (err, results) => {
+bcrypt.hash(plainTextPassword, saltRounds, (err, hash) => {
+  if (err) {
+    console.error("Error hashing password:", err);
+    return;
+  }
+  const sql = "INSERT INTO admins (username, password) VALUES (?, ?)";
+  db.query(sql, ["Admin", hash], (err, result) => {
     if (err) {
-      console.error("Error checking for existing Admin user:", err);
+      console.error("Error inserting admin credentials:", err);
       return;
     }
-
-    if (results.length === 0) {
-      // If Admin user does not exist, create it
-      bcrypt.hash(plainTextPassword, saltRounds, (err, hash) => {
-        if (err) {
-          console.error("Error hashing password:", err);
-          return;
-        }
-
-        const sql = "INSERT INTO admins (username, password) VALUES (?, ?)";
-        db.query(sql, ["Admin", hash], (err, result) => {
-          if (err) {
-            console.error("Error inserting admin credentials:", err);
-            return;
-          }
-          console.log("Admin credentials stored successfully.");
-        });
-      });
-    } else {
-      console.log("Admin user already exists.");
-    }
+    console.log("Admin credentials stored successfully.");
   });
+});
 
 app.post("/api/admin/login", (req, res) => {
   const { username, password } = req.body;
