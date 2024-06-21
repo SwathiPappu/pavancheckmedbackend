@@ -22,7 +22,7 @@ const allowedOrigins = [
   "https://ambitious-hill-07ef3e000.5.azurestaticapps.net",
   "http://localhost:5173",
   "https://green-beach-02c219400.5.azurestaticapps.net",
-  "https://checkmed-qr-ui.azurewebsites.net"
+  "https://qr-module.vercel.app/",
 ];
 
 app.use(
