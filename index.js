@@ -21,6 +21,7 @@ const allowedOrigins = [
   "https://checkmedqrmodule.netlify.app",
   "https://ambitious-hill-07ef3e000.5.azurestaticapps.net",
   "http://localhost:5173",
+  "https://green-beach-02c219400.5.azurestaticapps.net",
 ];
 
 app.use(
