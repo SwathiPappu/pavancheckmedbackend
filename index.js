@@ -3,7 +3,7 @@ require("dotenv").config(); // Make sure .env is in the correct location
 const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
-const cors = require("cors");
+// const cors = require("cors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const fs = require("fs");
@@ -17,29 +17,29 @@ const port = 3000; // Use PORT from .env or default to 3000
 //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 //   credentials: true,
 // }));
-const allowedOrigins = [
-  "https://checkmedqrmodule.netlify.app",
-  "https://ambitious-hill-07ef3e000.5.azurestaticapps.net",
-  "http://localhost:5173",
-  "https://green-beach-02c219400.5.azurestaticapps.net",
-  "https://qr-module.vercel.app/",
-];
+// const allowedOrigins = [
+//   "https://checkmedqrmodule.netlify.app",
+//   "https://ambitious-hill-07ef3e000.5.azurestaticapps.net",
+//   "http://localhost:5173",
+//   "https://green-beach-02c219400.5.azurestaticapps.net",
+//   "https://qr-module.vercel.app/",
+// ];
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl requests)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        return callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       // Allow requests with no origin (like mobile apps, curl requests)
+//       if (!origin) return callback(null, true);
+//       if (allowedOrigins.includes(origin)) {
+//         return callback(null, true);
+//       } else {
+//         return callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
+//   })
+// );
 app.use(bodyParser.json());
 
 // const db = mysql.createConnection({
