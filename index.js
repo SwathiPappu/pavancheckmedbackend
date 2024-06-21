@@ -12,11 +12,32 @@ const plainTextPassword = "admin123";
 const app = express();
 const port = 3000; // Use PORT from .env or default to 3000
 
-app.use(cors({
-  origin: ['https://checkmedqrmodule.netlify.app','https://ambitious-hill-07ef3e000.5.azurestaticapps.net', 'http://localhost:5173'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: ['https://checkmedqrmodule.netlify.app','https://ambitious-hill-07ef3e000.5.azurestaticapps.net', 'http://localhost:5173'],
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   credentials: true,
+// }));
+const allowedOrigins = [
+  "https://checkmedqrmodule.netlify.app",
+  "https://ambitious-hill-07ef3e000.5.azurestaticapps.net",
+  "http://localhost:5173",
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, curl requests)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(bodyParser.json());
 
 // const db = mysql.createConnection({
@@ -31,7 +52,9 @@ const db = mysql.createConnection({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   ssl: {
-    ca: fs.readFileSync(path.resolve(__dirname, "DigiCertGlobalRootCA.crt.pem")),
+    ca: fs.readFileSync(
+      path.resolve(__dirname, "DigiCertGlobalRootCA.crt.pem")
+    ),
   },
 });
 
@@ -247,7 +270,7 @@ app.post("/api/user", (req, res) => {
           email: "",
           age: "",
           gender: "",
-          packages:"",
+          packages: "",
         };
         db.query("INSERT INTO users SET ?", newUser, (err, result) => {
           if (err) {
