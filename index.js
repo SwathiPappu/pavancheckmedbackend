@@ -3,7 +3,7 @@ require("dotenv").config(); // Make sure .env is in the correct location
 const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
-// const cors = require("cors");
+const cors = require("cors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const fs = require("fs");
@@ -12,11 +12,10 @@ const plainTextPassword = "admin123";
 const app = express();
 const port = 3000; // Use PORT from .env or default to 3000
 
-// app.use(cors({
-//   origin: ['https://checkmedqrmodule.netlify.app','https://ambitious-hill-07ef3e000.5.azurestaticapps.net', 'http://localhost:5173'],
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   credentials: true,
-// }));
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 // const allowedOrigins = [
 //   "https://checkmedqrmodule.netlify.app",
 //   "https://ambitious-hill-07ef3e000.5.azurestaticapps.net",
